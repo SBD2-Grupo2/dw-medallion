@@ -151,7 +151,7 @@ ORDER BY
 
 -- Consulta: Análise de Acidentes por Condição Climática e Tipo de Estrada
 SELECT 
-    c.dec_clima AS "Condição Climática",
+    c.dec_clm AS "Condição Climática",
     v.dec_tipo_via AS "Tipo de Estrada",
     COUNT(f.ide_acidente) AS "Total de Acidentes",
     SUM(CASE WHEN s.dec_severidade = 'Fatal' THEN 1 ELSE 0 END) AS "Qtd Fatais",
@@ -159,17 +159,17 @@ SELECT
         (SUM(CASE WHEN s.dec_severidade = 'Fatal' THEN 1.0 ELSE 0 END) / COUNT(f.ide_acidente)) * 100, 
     2) AS "% Taxa de Letalidade"
 FROM dw_gold.fat_acidente f
-    JOIN dw_gold.dim_clima c ON f.fok_clima = c.suk_clima
+    JOIN dw_gold.dim_clm c ON f.fok_clm = c.suk_clm
     JOIN dw_gold.dim_tipo_via v ON f.fok_tipo_via = v.suk_tipo_via
     JOIN dw_gold.dim_severidade s ON f.fok_severidade = s.suk_severidade
-WHERE c.dec_clima NOT IN ('Unknown', 'Data missing or out of range', 'Desconhecido', 'Ausente')
+WHERE c.dec_clm NOT IN ('Unknown', 'Data missing or out of range', 'Desconhecido', 'Ausente')
   AND v.dec_tipo_via NOT IN ('Unknown', 'Data missing or out of range', 'Desconhecido', 'Ausente')
 
 GROUP BY 
-    c.dec_clima, 
+    c.dec_clm, 
     v.dec_tipo_via
 ORDER BY 
-    c.dec_clima, 
+    c.dec_clm, 
     "% Taxa de Letalidade" DESC;
 
 

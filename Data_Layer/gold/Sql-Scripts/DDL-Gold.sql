@@ -31,20 +31,20 @@ CREATE TABLE dw_gold.dim_severidade (
     dec_severidade VARCHAR(50)
 );
 
--- Dimensão Clima
-DROP TABLE IF EXISTS dw_gold.dim_clima CASCADE;
-CREATE TABLE dw_gold.dim_clima (
-    suk_clima INT PRIMARY KEY,
-    ide_clima INT,
-    dec_clima VARCHAR(100)
+-- Dimensão clm
+DROP TABLE IF EXISTS dw_gold.dim_clm CASCADE;
+CREATE TABLE dw_gold.dim_clm (
+    suk_clm INT PRIMARY KEY,
+    ide_clm INT,
+    dec_clm VARCHAR(100)
 );
 
--- Dimensão Condição da Pista
-DROP TABLE IF EXISTS dw_gold.dim_pista CASCADE;
-CREATE TABLE dw_gold.dim_pista (
-    suk_pista INT PRIMARY KEY,
-    ide_pista INT,
-    dec_pista VARCHAR(100)
+-- Dimensão Condição da pst
+DROP TABLE IF EXISTS dw_gold.dim_pst CASCADE;
+CREATE TABLE dw_gold.dim_pst (
+    suk_pst INT PRIMARY KEY,
+    ide_pst INT,
+    dec_pst VARCHAR(100)
 );
 
 -- Dimensão Condição de Luz
@@ -103,7 +103,7 @@ CREATE TABLE dw_gold.dim_cod_esp (
     dec_cod_esp VARCHAR(150)
 );
 
--- Dimensão Perigos na Pista
+-- Dimensão Perigos na pst
 DROP TABLE IF EXISTS dw_gold.dim_perigos CASCADE;
 CREATE TABLE dw_gold.dim_perigos (
     suk_perigos INT PRIMARY KEY,
@@ -226,8 +226,8 @@ CREATE TABLE dw_gold.fat_acidente (
     fok_tempo INT REFERENCES dw_gold.dim_tempo(suk_tempo),
     fok_severidade INT REFERENCES dw_gold.dim_severidade(suk_severidade),
     fok_urbano INT REFERENCES dw_gold.dim_urbano(suk_urbano),
-    fok_clima INT REFERENCES dw_gold.dim_clima(suk_clima),
-    fok_pista INT REFERENCES dw_gold.dim_pista(suk_pista),
+    fok_clm INT REFERENCES dw_gold.dim_clm(suk_clm),
+    fok_pst INT REFERENCES dw_gold.dim_pst(suk_pst),
     fok_luz INT REFERENCES dw_gold.dim_luz(suk_luz),
     fok_tipo_via INT REFERENCES dw_gold.dim_tipo_via(suk_tipo_via),
     fok_cruzamento INT REFERENCES dw_gold.dim_cruzamento(suk_cruzamento),
